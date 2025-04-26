@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+@theme {
+  /* Primary Colors */
+  --color-primary: #3ecf4c;
+  --color-primary-100: #e2fcd9cc;
+  --color-primary-200: #c0fab4;
+  --color-primary-300: #94f08b;
+  --color-primary-400: #6be26b;
+
+  /* Secondary Colors */
+  --color-secondary: #ffbd3a;
+  --color-secondary-100: #fff7d7cc;
+  --color-secondary-200: #ffecb0;
+  --color-secondary-300: #ffdf88;
+  --color-secondary-400: #ffd26b;
+
+  /* Tertiary Colors */
+  --color-tertiary: #f64920;
+  --color-tertiary-100: #fee8d2cc;
+  --color-tertiary-200: #fecaa5;
+  --color-tertiary-300: #fca578;
+  --color-tertiary-400: #f98256;
+
+  /* Other Colors */
+  --color-other-primary: #ffffff;
+  --color-other-base: #f4f5fa;
+  --color-other-secondary: #f9fafc;
+  --color-other-border: #3a35411f;
+
+  /* Text Colors */
+  --color-text-dark-primary: #222325;
+  --color-text-dark-secondary: #333333ad;
+  --color-text-dark-disabled: #3a354161;
+
+  --color-text-light-primary: #ffffff;
+  --color-text-light-secondary: #c1c2c4;
+  --color-text-light-disabled: #9d9ea1;
+
+  /* Warning Colors */
+  --color-warning: #fce91b;
+  --color-warning-pressed: #fff7d7cc;
+  --color-warning-hover: #ffecb0;
+  --color-warning-background: #fcf8ca;
+
+  /* Greyscale */
+  --color-greyscale-900: #212121;
+  --color-greyscale-800: #424242;
+  --color-greyscale-700: #616161;
+  --color-greyscale-600: #757575;
+  --color-greyscale-500: #9e9e9e;
+  --color-greyscale-400: #bdbdbd;
+  --color-greyscale-300: #e0e0e0;
+  --color-greyscale-200: #eeeeee;
+  --color-greyscale-100: #f5f5f5;
+  --color-greyscale-50: #fafafa;
+}
