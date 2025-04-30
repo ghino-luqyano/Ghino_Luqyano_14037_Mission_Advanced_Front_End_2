@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+const categories = ["Pemasaran", "Desain", "Pengembangan Diri", "Bisnis"];
+
 const AddCourseModal = ({ isOpen, onClose, onSave }) => {
   const [formData, setFormData] = useState({
     title: "",
     instructor: "",
     role: "",
+    category: categories[0],
     price: "",
   });
 
@@ -19,14 +22,16 @@ const AddCourseModal = ({ isOpen, onClose, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      formData.title &&
-      formData.instructor &&
-      formData.role &&
-      formData.price
-    ) {
+    const { title, instructor, role, price, category } = formData;
+    if (title && instructor && role && price && category) {
       onSave(formData);
-      setFormData({ title: "", instructor: "", role: "", price: "" });
+      setFormData({
+        title: "",
+        instructor: "",
+        role: "",
+        category: categories[0],
+        price: "",
+      });
       onClose();
     }
   };
@@ -46,7 +51,7 @@ const AddCourseModal = ({ isOpen, onClose, onSave }) => {
             value={formData.title}
             onChange={handleChange}
             placeholder="Judul Kursus"
-            className="focus:ring-primary rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-2 focus:outline-none"
+            className="focus:ring-primary rounded-md border px-4 py-2 text-sm focus:ring-2 focus:outline-none"
           />
           <input
             type="text"
@@ -54,7 +59,7 @@ const AddCourseModal = ({ isOpen, onClose, onSave }) => {
             value={formData.instructor}
             onChange={handleChange}
             placeholder="Nama Instruktur"
-            className="focus:ring-primary rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-2 focus:outline-none"
+            className="focus:ring-primary rounded-md border px-4 py-2 text-sm focus:ring-2 focus:outline-none"
           />
           <input
             type="text"
@@ -62,27 +67,39 @@ const AddCourseModal = ({ isOpen, onClose, onSave }) => {
             value={formData.role}
             onChange={handleChange}
             placeholder="Role Instruktur"
-            className="focus:ring-primary rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-2 focus:outline-none"
+            className="focus:ring-primary rounded-md border px-4 py-2 text-sm focus:ring-2 focus:outline-none"
           />
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="focus:ring-primary rounded-md border px-4 py-2 text-sm focus:ring-2 focus:outline-none"
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
           <input
             type="number"
             name="price"
             value={formData.price}
             onChange={handleChange}
             placeholder="Harga (contoh: 500000)"
-            className="focus:ring-primary rounded-md border border-gray-300 px-4 py-2 text-sm focus:ring-2 focus:outline-none"
+            className="focus:ring-primary rounded-md border px-4 py-2 text-sm focus:ring-2 focus:outline-none"
           />
           <div className="flex justify-end gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium hover:cursor-pointer hover:bg-gray-100"
+              className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-100"
             >
               Batal
             </button>
             <button
               type="submit"
-              className="bg-primary hover:bg-primary-400 rounded-md px-4 py-2 text-sm font-semibold text-white hover:cursor-pointer"
+              className="bg-primary hover:bg-primary-400 rounded-md px-4 py-2 text-sm font-semibold text-white"
             >
               Simpan
             </button>

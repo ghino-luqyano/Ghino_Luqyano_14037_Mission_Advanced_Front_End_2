@@ -20,7 +20,7 @@ const ITEMS_PER_PAGE = 6;
 
 const CourseList = () => {
   const dispatch = useDispatch();
-  const courses = useSelector((state) => state.courses.courses);
+  const { courses, category } = useSelector((state) => state.courses);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -83,14 +83,15 @@ const CourseList = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   };
 
-  const filteredCourses = courses.filter(
-    (course) =>
+  const filteredCourses = courses.filter((course) => {
+    const matchesSearch =
       course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      course.instructor.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+      course.instructor.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = category ? course.category === category : true;
+    return matchesSearch && matchesCategory;
+  });
 
   const totalPages = Math.ceil(filteredCourses.length / ITEMS_PER_PAGE);
-
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedCourses = filteredCourses.slice(
     startIndex,

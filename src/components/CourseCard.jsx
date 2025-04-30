@@ -1,20 +1,20 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+const categories = ["Pemasaran", "Desain", "Pengembangan Diri", "Bisnis"];
+
 const CourseCard = ({ course, onDelete, onUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     title: course.title,
     instructor: course.instructor,
     price: course.price,
+    category: course.category || categories[0],
   });
 
   const formatPrice = (price) => {
-    if (price >= 1_000_000) {
-      return `Rp${price / 1_000_000}JT`;
-    } else if (price >= 1_000) {
-      return `Rp${price / 1_000}K`;
-    }
+    if (price >= 1_000_000) return `Rp${price / 1_000_000}JT`;
+    if (price >= 1_000) return `Rp${price / 1_000}K`;
     return `Rp${price}`;
   };
 
@@ -56,8 +56,20 @@ const CourseCard = ({ course, onDelete, onUpdate }) => {
                   onChange={handleChange}
                   className="text-text-dark-primary rounded border border-gray-300 p-2 text-sm"
                 />
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="text-text-dark-primary rounded border border-gray-300 p-2 text-sm"
+                >
+                  {categories.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
                 <input
-                  type="text"
+                  type="number"
                   name="price"
                   value={formData.price}
                   onChange={handleChange}
@@ -85,11 +97,11 @@ const CourseCard = ({ course, onDelete, onUpdate }) => {
             alt="Rating"
             className="h-4 w-4"
           />
-          <span className="text-text-dark-secondary text-sm font-medium tracking-tight underline">
+          <span className="text-text-dark-secondary text-sm font-medium underline">
             {course.rating} ({course.reviews})
           </span>
         </div>
-        <span className="text-primary text-2xl font-semibold tracking-tight">
+        <span className="text-primary text-2xl font-semibold">
           {formatPrice(course.price)}
         </span>
       </div>
@@ -99,13 +111,13 @@ const CourseCard = ({ course, onDelete, onUpdate }) => {
           <>
             <button
               onClick={handleSave}
-              className="bg-primary hover:bg-primary-400 rounded px-3 py-1 text-sm font-semibold text-white transition hover:cursor-pointer"
+              className="bg-primary hover:bg-primary-400 rounded px-3 py-1 text-sm font-semibold text-white transition"
             >
               Simpan
             </button>
             <button
               onClick={() => setIsEditing(false)}
-              className="rounded border border-gray-300 px-3 py-1 text-sm font-semibold transition hover:cursor-pointer hover:bg-gray-100"
+              className="rounded border border-gray-300 px-3 py-1 text-sm font-semibold hover:bg-gray-100"
             >
               Batal
             </button>
@@ -114,13 +126,13 @@ const CourseCard = ({ course, onDelete, onUpdate }) => {
           <>
             <button
               onClick={() => setIsEditing(true)}
-              className="rounded border border-gray-300 px-3 py-1 text-sm font-semibold transition hover:cursor-pointer hover:bg-gray-100"
+              className="rounded border border-gray-300 px-3 py-1 text-sm font-semibold hover:bg-gray-100"
             >
               Edit
             </button>
             <button
               onClick={() => onDelete(course.id)}
-              className="rounded border border-red-400 px-3 py-1 text-sm font-semibold text-red-500 transition hover:cursor-pointer hover:bg-red-100"
+              className="rounded border border-red-400 px-3 py-1 text-sm font-semibold text-red-500 hover:bg-red-100"
             >
               Hapus
             </button>

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   courses: [],
+  category: null,
 };
 
 const courseSlice = createSlice({
@@ -27,9 +28,18 @@ const courseSlice = createSlice({
         (course) => course.id !== action.payload,
       );
     },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
   },
 });
 
-export const { setCourses, addCourse, updateCourse, deleteCourse } =
-  courseSlice.actions;
+export const {
+  setCourses,
+  addCourse,
+  updateCourse,
+  deleteCourse,
+  setCategory,
+} = courseSlice.actions;
+
 export default courseSlice.reducer;
